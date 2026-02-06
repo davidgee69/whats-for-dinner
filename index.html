@@ -13,12 +13,11 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            background: #0a0a0f;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             padding: 20px;
             overflow-x: hidden;
         }
@@ -31,252 +30,111 @@
 
         h1 {
             color: #ffd700;
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes glow {
-            from { text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700; }
-            to { text-shadow: 0 0 20px #ffd700, 0 0 30px #ff8c00; }
-        }
-
-        .subtitle {
-            color: #888;
-            margin-bottom: 30px;
-            font-size: 0.9rem;
-        }
-
-        /* Screens */
-        .screen {
-            display: none;
-        }
-        .screen.active {
-            display: block;
-        }
-
-        /* Setup Screen */
-        .setup-section {
-            background: rgba(255,255,255,0.05);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .setup-title {
-            color: #ffd700;
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            text-align: left;
-        }
-
-        .restaurant-list {
-            max-height: 200px;
-            overflow-y: auto;
-            margin-bottom: 15px;
-        }
-
-        .restaurant-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: rgba(0,0,0,0.3);
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin-bottom: 8px;
-        }
-
-        .restaurant-item span {
-            color: #fff;
-            font-size: 1rem;
-        }
-
-        .restaurant-item .delete-btn {
-            background: transparent;
-            border: none;
-            color: #ff4757;
-            font-size: 1.2rem;
-            cursor: pointer;
-            padding: 0 5px;
-        }
-
-        .add-restaurant {
-            display: flex;
-            gap: 10px;
-        }
-
-        .add-restaurant input {
-            flex: 1;
-            padding: 12px 15px;
-            border: 1px solid #333;
-            border-radius: 8px;
-            background: #0a0a1a;
-            color: #fff;
-            font-size: 1rem;
-        }
-
-        .add-restaurant input:focus {
-            outline: none;
-            border-color: #ffd700;
-        }
-
-        .add-btn {
-            padding: 12px 20px;
-            background: #ffd700;
-            color: #000;
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        /* Pre-game filter */
-        .filter-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-        }
-
-        .filter-item {
-            display: flex;
-            align-items: center;
-            background: rgba(0,0,0,0.3);
-            padding: 12px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border: 2px solid transparent;
-        }
-
-        .filter-item.selected {
-            border-color: #2ecc71;
-            background: rgba(46, 204, 113, 0.2);
-        }
-
-        .filter-item.excluded {
-            border-color: #ff4757;
-            background: rgba(255, 71, 87, 0.2);
-            opacity: 0.6;
-        }
-
-        .filter-item span {
-            color: #fff;
-            font-size: 0.95rem;
-            margin-left: 8px;
-        }
-
-        .filter-item .emoji {
-            font-size: 1.3rem;
-        }
-
-        .filter-hint {
-            color: #666;
-            font-size: 0.8rem;
-            margin-top: 10px;
-            text-align: left;
-        }
-
-        /* Game Screen */
-        .suggestion-card {
-            background: linear-gradient(145deg, #2a2a4a, #1a1a3a);
-            border: 3px solid #ffd700;
-            border-radius: 20px;
-            padding: 40px 30px;
-            margin: 20px 0;
-            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.2);
-            transition: transform 0.3s ease;
-        }
-
-        .suggestion-card.shake {
-            animation: shake 0.5s ease-in-out;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0) rotate(0); }
-            20% { transform: translateX(-20px) rotate(-5deg); }
-            40% { transform: translateX(20px) rotate(5deg); }
-            60% { transform: translateX(-15px) rotate(-3deg); }
-            80% { transform: translateX(15px) rotate(3deg); }
-        }
-
-        .suggestion-text {
-            font-size: 2.2rem;
-            color: #fff;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .suggestion-emoji {
-            font-size: 4rem;
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .tokens-container {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin: 25px 0;
-            flex-wrap: wrap;
-        }
-
-        .player-tokens {
-            background: rgba(255,255,255,0.05);
-            padding: 15px 20px;
-            border-radius: 15px;
-            min-width: 140px;
-        }
-
-        .player-name {
-            color: #ffd700;
-            font-weight: bold;
-            margin-bottom: 8px;
-            font-size: 1.1rem;
-        }
-
-        .tokens {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .token {
-            width: 30px;
-            height: 30px;
-            background: #ffd700;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 10px rgba(255, 215, 0, 0.5);
-        }
-
-        .token.used {
-            background: #333;
-            box-shadow: none;
-            transform: scale(0.8);
-        }
-
-        .buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+            font-size: 2rem;
+            margin-bottom: 5px;
             margin-top: 20px;
         }
 
-        .veto-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 0.85rem;
         }
 
+        /* Screens */
+        .screen { display: none; }
+        .screen.active { display: block; }
+
+        /* Player indicator */
+        .player-turn {
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            color: #000;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 25px;
+            display: inline-block;
+        }
+
+        .player-turn.eirene {
+            background: linear-gradient(135deg, #ff6b9d, #c44569);
+            color: #fff;
+        }
+
+        /* Rating list */
+        .rating-list {
+            max-height: 55vh;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .rating-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .rating-item .emoji {
+            font-size: 2rem;
+            width: 50px;
+            text-align: center;
+        }
+
+        .rating-item .name {
+            color: #fff;
+            font-size: 1rem;
+            flex: 1;
+            text-align: left;
+        }
+
+        .rating-item .score {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .rating-item .score button {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            background: #333;
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .rating-item .score button:active {
+            transform: scale(0.95);
+        }
+
+        .rating-item .score .value {
+            color: #ffd700;
+            font-size: 1.5rem;
+            font-weight: bold;
+            width: 35px;
+            text-align: center;
+        }
+
+        .rating-item .score .value.high {
+            color: #2ecc71;
+        }
+
+        .rating-item .score .value.low {
+            color: #666;
+        }
+
+        /* Buttons */
         button {
-            padding: 18px 35px;
+            padding: 18px 40px;
             font-size: 1.1rem;
             font-weight: bold;
             border: none;
@@ -287,66 +145,29 @@
             letter-spacing: 1px;
         }
 
-        .veto-btn {
-            background: linear-gradient(145deg, #ff4757, #c0392b);
-            color: white;
-            flex: 1;
-            min-width: 120px;
-        }
-
-        .veto-btn:hover:not(:disabled) {
-            transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(255, 71, 87, 0.5);
-        }
-
-        .veto-btn:disabled {
-            background: #444;
-            cursor: not-allowed;
-            opacity: 0.5;
-        }
-
-        .veto-btn.skip {
-            background: #666;
-        }
-
-        .accept-btn {
-            background: linear-gradient(145deg, #2ecc71, #27ae60);
-            color: white;
-            font-size: 1.3rem;
-            padding: 22px 40px;
-        }
-
-        .accept-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 25px rgba(46, 204, 113, 0.5);
-        }
-
-        .start-btn {
-            background: linear-gradient(145deg, #ffd700, #ff8c00);
+        .primary-btn {
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
             color: #000;
-            font-size: 1.3rem;
-            padding: 22px 40px;
             margin-top: 20px;
         }
 
-        .start-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 25px rgba(255, 215, 0, 0.5);
+        .primary-btn:hover {
+            transform: scale(1.03);
+            box-shadow: 0 5px 25px rgba(255, 215, 0, 0.4);
         }
 
-        .start-btn:disabled {
-            background: #444;
-            color: #888;
-            cursor: not-allowed;
+        .primary-btn.eirene {
+            background: linear-gradient(135deg, #ff6b9d, #c44569);
+            color: #fff;
         }
 
         .secondary-btn {
             background: transparent;
-            color: #888;
-            border: 2px solid #444;
-            margin-top: 10px;
+            color: #666;
+            border: 2px solid #333;
             padding: 12px 25px;
             font-size: 0.9rem;
+            margin-top: 15px;
         }
 
         .secondary-btn:hover {
@@ -354,61 +175,147 @@
             color: #ffd700;
         }
 
-        .skip-indicator {
-            font-size: 0.7rem;
-            color: #ff6b6b;
-            margin-top: 5px;
-            height: 18px;
-        }
-
-        /* Winner Screen */
-        .winner-screen {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.95);
-            z-index: 1000;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+        /* Setup screen */
+        .setup-section {
+            background: rgba(255,255,255,0.03);
+            border-radius: 15px;
             padding: 20px;
-        }
-
-        .winner-screen.show {
-            display: flex;
-        }
-
-        .winner-text {
-            font-size: 1.5rem;
-            color: #ffd700;
             margin-bottom: 20px;
-            text-transform: uppercase;
+            text-align: left;
         }
 
-        .winner-choice {
-            font-size: 3rem;
+        .setup-title {
+            color: #ffd700;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .restaurant-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .chip {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chip .remove {
+            background: none;
+            border: none;
+            color: #ff4757;
+            cursor: pointer;
+            padding: 0;
+            font-size: 1rem;
+            line-height: 1;
+        }
+
+        .add-input {
+            display: flex;
+            gap: 10px;
+        }
+
+        .add-input input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #333;
+            border-radius: 10px;
+            background: #111;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .add-input input:focus {
+            outline: none;
+            border-color: #ffd700;
+        }
+
+        .add-input button {
+            padding: 12px 20px;
+            border-radius: 10px;
+            background: #ffd700;
+            color: #000;
+        }
+
+        /* Result screen */
+        .result-card {
+            background: linear-gradient(145deg, #1a1a2a, #0f0f1a);
+            border: 3px solid #ffd700;
+            border-radius: 25px;
+            padding: 40px 30px;
+            margin: 30px 0;
+        }
+
+        .result-card.compromise {
+            border-color: #ff8c00;
+        }
+
+        .result-card.no-match {
+            border-color: #ff4757;
+        }
+
+        .result-emoji {
+            font-size: 5rem;
+            margin-bottom: 15px;
+        }
+
+        .result-name {
+            font-size: 2.5rem;
             color: #fff;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .result-scores {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .result-score {
             text-align: center;
         }
 
-        .winner-emoji {
-            font-size: 6rem;
-            margin-bottom: 20px;
+        .result-score .label {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
         }
 
-        .winner-rule {
-            color: #ff6b6b;
+        .result-score .value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .result-score .value.dad { color: #ffd700; }
+        .result-score .value.eirene { color: #ff6b9d; }
+
+        .result-message {
+            color: #2ecc71;
             font-size: 1.2rem;
-            margin: 20px 0;
+            margin-top: 20px;
             padding: 15px;
-            border: 2px dashed #ff6b6b;
+            border: 2px dashed #2ecc71;
             border-radius: 10px;
-            max-width: 350px;
+        }
+
+        .result-message.warning {
+            color: #ff8c00;
+            border-color: #ff8c00;
+        }
+
+        .result-message.bad {
+            color: #ff4757;
+            border-color: #ff4757;
         }
 
         /* Confetti */
@@ -422,178 +329,119 @@
         }
 
         @keyframes fall {
-            to {
-                transform: translateY(100vh) rotate(720deg);
-            }
-        }
-
-        /* Empty state */
-        .empty-state {
-            color: #666;
-            padding: 30px;
-            font-style: italic;
-        }
-
-        .selected-count {
-            color: #2ecc71;
-            font-size: 0.9rem;
-            margin-top: 10px;
+            to { transform: translateY(100vh) rotate(720deg); }
         }
 
         /* Responsive */
         @media (max-width: 400px) {
-            h1 { font-size: 1.8rem; }
-            .suggestion-text { font-size: 1.8rem; }
-            .suggestion-emoji { font-size: 3rem; }
-            .suggestion-card { padding: 30px 20px; }
-            button { padding: 15px 25px; font-size: 1rem; }
-            .winner-choice { font-size: 2.5rem; }
-            .filter-grid { grid-template-columns: 1fr; }
+            h1 { font-size: 1.7rem; }
+            .result-name { font-size: 2rem; }
+            .result-emoji { font-size: 4rem; }
+            .rating-item { padding: 12px; }
+            .rating-item .emoji { font-size: 1.5rem; width: 40px; }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>🍽️ What's For Dinner?!</h1>
-        <p class="subtitle">The game that ends "I don't know" forever</p>
+        <p class="subtitle">Rate your cravings, find the perfect match</p>
 
         <!-- SETUP SCREEN -->
         <div class="screen active" id="setupScreen">
-            <!-- Master Restaurant List -->
             <div class="setup-section">
-                <div class="setup-title">📋 Your Family's Restaurants</div>
-                <div class="restaurant-list" id="restaurantList"></div>
-                <div class="add-restaurant">
-                    <input type="text" id="newRestaurant" placeholder="Add restaurant or cuisine...">
-                    <button class="add-btn" onclick="addRestaurant()">+</button>
+                <div class="setup-title">📋 Your Restaurant List</div>
+                <div class="restaurant-chips" id="restaurantChips"></div>
+                <div class="add-input">
+                    <input type="text" id="newRestaurant" placeholder="Add restaurant...">
+                    <button onclick="addRestaurant()">+</button>
                 </div>
             </div>
-
-            <!-- Tonight's Mood Filter -->
-            <div class="setup-section">
-                <div class="setup-title">🌙 What sounds good tonight?</div>
-                <p class="filter-hint">Tap to include ✓ · Double-tap to exclude ✗</p>
-                <div class="filter-grid" id="filterGrid"></div>
-                <div class="selected-count" id="selectedCount"></div>
-            </div>
-
-            <button class="start-btn" id="startBtn" onclick="startGame()">🎮 START GAME</button>
-            <button class="secondary-btn" onclick="selectAll()">Select All</button>
-            <button class="secondary-btn" onclick="clearSelection()">Clear Selection</button>
+            <button class="primary-btn" onclick="startRating()">🎮 START</button>
         </div>
 
-        <!-- GAME SCREEN -->
-        <div class="screen" id="gameScreen">
-            <div class="suggestion-card" id="suggestionCard">
-                <span class="suggestion-emoji" id="suggestionEmoji">🍕</span>
-                <div class="suggestion-text" id="suggestionText">Pizza</div>
-            </div>
-
-            <div class="tokens-container">
-                <div class="player-tokens">
-                    <div class="player-name">👨 Dad</div>
-                    <div class="tokens" id="dadTokens"></div>
-                    <div class="skip-indicator" id="dadSkip"></div>
-                </div>
-                <div class="player-tokens">
-                    <div class="player-name">👧 Daughter</div>
-                    <div class="tokens" id="daughterTokens"></div>
-                    <div class="skip-indicator" id="daughterSkip"></div>
-                </div>
-            </div>
-
-            <div class="buttons">
-                <button class="accept-btn" onclick="acceptChoice()">🎉 LET'S EAT THIS!</button>
-                <div class="veto-buttons">
-                    <button class="veto-btn" id="dadVeto" onclick="veto('dad')">👨 Dad Veto</button>
-                    <button class="veto-btn" id="daughterVeto" onclick="veto('daughter')">👧 Daughter Veto</button>
-                </div>
-                <button class="secondary-btn" onclick="backToSetup()">← Back to Setup</button>
-            </div>
+        <!-- DAD RATING SCREEN -->
+        <div class="screen" id="dadScreen">
+            <div class="player-turn">👨 Dad's Turn</div>
+            <p style="color:#888; margin-bottom:20px;">How much do you want each one tonight?</p>
+            <div class="rating-list" id="dadRatingList"></div>
+            <button class="primary-btn" onclick="finishDadRating()">DONE →</button>
         </div>
-    </div>
 
-    <!-- WINNER SCREEN -->
-    <div class="winner-screen" id="winnerScreen">
-        <div class="winner-text">🎊 IT'S DECIDED! 🎊</div>
-        <div class="winner-emoji" id="winnerEmoji">🍕</div>
-        <div class="winner-choice" id="winnerChoice">Pizza</div>
-        <div class="winner-rule">⚠️ NO MORE COMPLAINING ALLOWED ⚠️</div>
-        <button class="accept-btn" onclick="playAgain()">Play Again</button>
+        <!-- EIRENE RATING SCREEN -->
+        <div class="screen" id="eireneScreen">
+            <div class="player-turn eirene">👧 Eirene's Turn</div>
+            <p style="color:#888; margin-bottom:20px;">How much do you want each one tonight?</p>
+            <div class="rating-list" id="eireneRatingList"></div>
+            <button class="primary-btn eirene" onclick="showResult()">SEE RESULT →</button>
+        </div>
+
+        <!-- RESULT SCREEN -->
+        <div class="screen" id="resultScreen">
+            <div class="result-card" id="resultCard">
+                <div class="result-emoji" id="resultEmoji">🍕</div>
+                <div class="result-name" id="resultName">Pizza</div>
+                <div class="result-scores">
+                    <div class="result-score">
+                        <div class="label">👨 Dad</div>
+                        <div class="value dad" id="resultDadScore">8</div>
+                    </div>
+                    <div class="result-score">
+                        <div class="label">👧 Eirene</div>
+                        <div class="value eirene" id="resultEireneScore">9</div>
+                    </div>
+                </div>
+                <div class="result-message" id="resultMessage">You both want this! 🎉</div>
+            </div>
+            <button class="primary-btn" onclick="playAgain()">🔄 PLAY AGAIN</button>
+            <button class="secondary-btn" onclick="backToSetup()">✏️ Edit Restaurants</button>
+        </div>
     </div>
 
     <script>
-        // Default restaurants (only used if nothing saved)
-        const defaultRestaurants = [
-            { emoji: '🍕', name: 'Pizza' },
-            { emoji: '🌮', name: 'Mexican' },
-            { emoji: '🍝', name: 'Italian' },
-            { emoji: '🍜', name: 'Pho' },
-            { emoji: '🍣', name: 'Sushi' },
-            { emoji: '🍔', name: 'Burgers' },
-            { emoji: '🥡', name: 'Chinese' },
-            { emoji: '🍛', name: 'Indian' },
-            { emoji: '🍗', name: 'Chicken' },
-            { emoji: '🍱', name: 'Korean BBQ' },
-            { emoji: '🍲', name: 'Thai' },
-            { emoji: '🍖', name: 'BBQ' },
-            { emoji: '🥙', name: 'Greek' },
-            { emoji: '🍤', name: 'Seafood' }
-        ];
-
-        // Emoji picker for auto-detection
+        // Emoji detection
         const emojiMap = {
-            'pizza': '🍕', 'mexican': '🌮', 'taco': '🌮', 'burrito': '🌯',
+            'pizza': '🍕', 'via 313': '🍕', 'homeslice': '🍕',
+            'mexican': '🌮', 'taco': '🌮', 'torchys': '🌮', 'burrito': '🌯',
             'italian': '🍝', 'pasta': '🍝', 'spaghetti': '🍝',
             'pho': '🍜', 'vietnamese': '🍜', 'ramen': '🍜', 'noodle': '🍜',
-            'sushi': '🍣', 'japanese': '🍣',
-            'burger': '🍔', 'hamburger': '🍔',
+            'sushi': '🍣', 'japanese': '🍣', 'uchi': '🍣',
+            'burger': '🍔', 'hamburger': '🍔', 'pterrys': '🍔', "p terry": '🍔', 'shake shack': '🍔', 'in n out': '🍔',
             'chinese': '🥡', 'dim sum': '🥟', 'dumpling': '🥟',
             'indian': '🍛', 'curry': '🍛',
-            'salad': '🥗', 'healthy': '🥗',
-            'chicken': '🍗', 'wings': '🍗',
+            'salad': '🥗', 'healthy': '🥗', 'sweetgreen': '🥗',
+            'chicken': '🍗', 'wings': '🍗', 'canes': '🍗', 'chick-fil-a': '🍗', 'chickfila': '🍗',
             'mediterranean': '🌯', 'greek': '🥙', 'gyro': '🥙',
-            'korean': '🍱', 'bbq': '🍖', 'barbecue': '🍖',
+            'korean': '🍱', 'kbbq': '🍱',
+            'bbq': '🍖', 'barbecue': '🍖', 'franklins': '🍖', 'la barbecue': '🍖', 'terry black': '🍖',
             'sandwich': '🥪', 'sub': '🥪',
             'thai': '🍲', 'soup': '🍲',
-            'spanish': '🥘', 'tapas': '🥘',
             'seafood': '🍤', 'fish': '🐟', 'shrimp': '🍤',
-            'hot dog': '🌭', 'hotdog': '🌭',
             'steak': '🥩', 'steakhouse': '🥩',
             'breakfast': '🍳', 'brunch': '🍳',
-            'dessert': '🍰', 'ice cream': '🍦',
-            'coffee': '☕', 'cafe': '☕'
+            'home': '🏠', 'homemade': '🏠', 'cook': '🏠',
+            'chipotle': '🌯', 'qdoba': '🌯',
+            'whataburger': '🍔', 'five guys': '🍔',
+            'chilis': '🌶️', 'applebees': '🍎',
+            'olive garden': '🍝', 'carrabas': '🍝',
+            'panda express': '🥡', 'pf changs': '🥡'
         };
 
+        const defaultRestaurants = [
+            { emoji: '🍕', name: 'Via 313' },
+            { emoji: '🍔', name: "P Terry's" },
+            { emoji: '🌮', name: "Torchy's" },
+            { emoji: '🍗', name: "Chick-fil-A" },
+            { emoji: '🍣', name: 'Sushi' },
+            { emoji: '🍜', name: 'Pho' },
+            { emoji: '🍖', name: 'BBQ' },
+            { emoji: '🏠', name: 'Cook at Home' }
+        ];
+
         // State
-        let masterList = [];
-        let filterState = {}; // 'selected', 'excluded', or undefined
-        let gameList = [];
-        let currentIndex = 0;
-        let dadTokens = 3;
-        let daughterTokens = 3;
-        let dadSkip = false;
-        let daughterSkip = false;
-
-        // Load master list
-        function loadMasterList() {
-            const saved = localStorage.getItem('dinnerMasterList');
-            if (saved) {
-                try {
-                    masterList = JSON.parse(saved);
-                } catch {
-                    masterList = [...defaultRestaurants];
-                }
-            } else {
-                masterList = [...defaultRestaurants];
-            }
-            renderRestaurantList();
-            renderFilterGrid();
-        }
-
-        function saveMasterList() {
-            localStorage.setItem('dinnerMasterList', JSON.stringify(masterList));
-        }
+        let restaurants = [];
+        let dadRatings = {};
+        let eireneRatings = {};
 
         function getEmoji(name) {
             const lower = name.toLowerCase();
@@ -603,259 +451,179 @@
             return '🍽️';
         }
 
-        function addRestaurant() {
-            const input = document.getElementById('newRestaurant');
-            const name = input.value.trim();
-            if (!name) return;
-
-            // Check for duplicate
-            if (masterList.some(r => r.name.toLowerCase() === name.toLowerCase())) {
-                input.value = '';
-                return;
+        function loadRestaurants() {
+            const saved = localStorage.getItem('dinnerRestaurantsV2');
+            if (saved) {
+                try {
+                    restaurants = JSON.parse(saved);
+                } catch {
+                    restaurants = [...defaultRestaurants];
+                }
+            } else {
+                restaurants = [...defaultRestaurants];
             }
-
-            const emoji = getEmoji(name);
-            masterList.push({ emoji, name });
-            saveMasterList();
-            renderRestaurantList();
-            renderFilterGrid();
-            input.value = '';
+            renderChips();
         }
 
-        function deleteRestaurant(index) {
-            masterList.splice(index, 1);
-            saveMasterList();
-            renderRestaurantList();
-            renderFilterGrid();
+        function saveRestaurants() {
+            localStorage.setItem('dinnerRestaurantsV2', JSON.stringify(restaurants));
         }
 
-        function renderRestaurantList() {
-            const container = document.getElementById('restaurantList');
-            if (masterList.length === 0) {
-                container.innerHTML = '<div class="empty-state">No restaurants yet. Add some above!</div>';
+        function renderChips() {
+            const container = document.getElementById('restaurantChips');
+            if (restaurants.length === 0) {
+                container.innerHTML = '<span style="color:#666">No restaurants yet</span>';
                 return;
             }
-            container.innerHTML = masterList.map((r, i) => `
-                <div class="restaurant-item">
-                    <span>${r.emoji} ${r.name}</span>
-                    <button class="delete-btn" onclick="deleteRestaurant(${i})">×</button>
+            container.innerHTML = restaurants.map((r, i) => `
+                <div class="chip">
+                    ${r.emoji} ${r.name}
+                    <button class="remove" onclick="removeRestaurant(${i})">×</button>
                 </div>
             `).join('');
         }
 
-        function renderFilterGrid() {
-            const container = document.getElementById('filterGrid');
-            if (masterList.length === 0) {
-                container.innerHTML = '<div class="empty-state">Add restaurants first</div>';
-                updateSelectedCount();
+        function addRestaurant() {
+            const input = document.getElementById('newRestaurant');
+            const name = input.value.trim();
+            if (!name) return;
+            if (restaurants.some(r => r.name.toLowerCase() === name.toLowerCase())) {
+                input.value = '';
                 return;
             }
-            container.innerHTML = masterList.map((r, i) => {
-                const state = filterState[i];
-                const stateClass = state === 'selected' ? 'selected' : state === 'excluded' ? 'excluded' : '';
-                const icon = state === 'selected' ? '✓' : state === 'excluded' ? '✗' : '';
+            restaurants.push({ emoji: getEmoji(name), name });
+            saveRestaurants();
+            renderChips();
+            input.value = '';
+        }
+
+        function removeRestaurant(index) {
+            restaurants.splice(index, 1);
+            saveRestaurants();
+            renderChips();
+        }
+
+        function renderRatingList(containerId, ratings) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = restaurants.map((r, i) => {
+                const score = ratings[i] || 5;
+                const scoreClass = score >= 7 ? 'high' : score <= 3 ? 'low' : '';
                 return `
-                    <div class="filter-item ${stateClass}" onclick="toggleFilter(${i})" data-index="${i}">
-                        <span class="emoji">${r.emoji}</span>
-                        <span>${r.name} ${icon}</span>
+                    <div class="rating-item">
+                        <div class="emoji">${r.emoji}</div>
+                        <div class="name">${r.name}</div>
+                        <div class="score">
+                            <button onclick="adjustRating('${containerId}', ${i}, -1)">−</button>
+                            <div class="value ${scoreClass}" id="${containerId}-score-${i}">${score}</div>
+                            <button onclick="adjustRating('${containerId}', ${i}, 1)">+</button>
+                        </div>
                     </div>
                 `;
             }).join('');
-            updateSelectedCount();
         }
 
-        function toggleFilter(index) {
-            const current = filterState[index];
-            if (!current) {
-                filterState[index] = 'selected';
-            } else if (current === 'selected') {
-                filterState[index] = 'excluded';
-            } else {
-                delete filterState[index];
-            }
-            renderFilterGrid();
-        }
-
-        function selectAll() {
-            masterList.forEach((_, i) => {
-                filterState[i] = 'selected';
-            });
-            renderFilterGrid();
-        }
-
-        function clearSelection() {
-            filterState = {};
-            renderFilterGrid();
-        }
-
-        function updateSelectedCount() {
-            const selected = Object.values(filterState).filter(s => s === 'selected').length;
-            const excluded = Object.values(filterState).filter(s => s === 'excluded').length;
-            const available = masterList.length - excluded;
+        function adjustRating(containerId, index, delta) {
+            const ratings = containerId === 'dadRatingList' ? dadRatings : eireneRatings;
+            const current = ratings[index] || 5;
+            const newVal = Math.max(1, Math.min(10, current + delta));
+            ratings[index] = newVal;
             
-            const countEl = document.getElementById('selectedCount');
-            const startBtn = document.getElementById('startBtn');
-            
-            if (selected > 0) {
-                countEl.textContent = `${selected} selected for tonight`;
-                startBtn.disabled = false;
-            } else if (available > 0 && excluded > 0) {
-                countEl.textContent = `${available} options available (${excluded} excluded)`;
-                startBtn.disabled = false;
-            } else if (masterList.length > 0) {
-                countEl.textContent = 'Tap options to select, or just hit Start';
-                startBtn.disabled = false;
-            } else {
-                countEl.textContent = 'Add some restaurants first';
-                startBtn.disabled = true;
-            }
+            const el = document.getElementById(`${containerId}-score-${index}`);
+            el.textContent = newVal;
+            el.className = 'value ' + (newVal >= 7 ? 'high' : newVal <= 3 ? 'low' : '');
         }
 
-        function startGame() {
-            // Build game list based on filter
-            const selected = [];
-            const excluded = [];
-            
-            masterList.forEach((r, i) => {
-                if (filterState[i] === 'selected') selected.push(r);
-                else if (filterState[i] === 'excluded') excluded.push(r);
-            });
+        function switchScreen(from, to) {
+            document.getElementById(from).classList.remove('active');
+            document.getElementById(to).classList.add('active');
+        }
 
-            if (selected.length > 0) {
-                gameList = [...selected];
-            } else {
-                // Use all non-excluded
-                gameList = masterList.filter((_, i) => filterState[i] !== 'excluded');
-            }
-
-            if (gameList.length === 0) {
-                alert('No restaurants to choose from!');
+        function startRating() {
+            if (restaurants.length === 0) {
+                alert('Add some restaurants first!');
                 return;
             }
-
-            // Shuffle
-            shuffleArray(gameList);
-            
-            // Reset game state
-            currentIndex = 0;
-            dadTokens = 3;
-            daughterTokens = 3;
-            dadSkip = false;
-            daughterSkip = false;
-
-            // Switch screens
-            document.getElementById('setupScreen').classList.remove('active');
-            document.getElementById('gameScreen').classList.add('active');
-
-            renderTokens();
-            updateButtons();
-            showSuggestion();
+            // Reset ratings to 5
+            dadRatings = {};
+            eireneRatings = {};
+            restaurants.forEach((_, i) => {
+                dadRatings[i] = 5;
+                eireneRatings[i] = 5;
+            });
+            renderRatingList('dadRatingList', dadRatings);
+            switchScreen('setupScreen', 'dadScreen');
         }
 
-        function backToSetup() {
-            document.getElementById('gameScreen').classList.remove('active');
-            document.getElementById('setupScreen').classList.add('active');
+        function finishDadRating() {
+            renderRatingList('eireneRatingList', eireneRatings);
+            switchScreen('dadScreen', 'eireneScreen');
         }
 
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-        }
+        function showResult() {
+            // Calculate scores
+            const scores = restaurants.map((r, i) => ({
+                restaurant: r,
+                dad: dadRatings[i] || 5,
+                eirene: eireneRatings[i] || 5,
+                combined: (dadRatings[i] || 5) + (eireneRatings[i] || 5),
+                min: Math.min(dadRatings[i] || 5, eireneRatings[i] || 5)
+            }));
 
-        function renderTokens() {
-            const dadContainer = document.getElementById('dadTokens');
-            const daughterContainer = document.getElementById('daughterTokens');
+            // Find perfect matches (both >= 7)
+            const perfectMatches = scores.filter(s => s.dad >= 7 && s.eirene >= 7);
             
-            dadContainer.innerHTML = '';
-            daughterContainer.innerHTML = '';
-            
-            for (let i = 0; i < 3; i++) {
-                const dadToken = document.createElement('div');
-                dadToken.className = 'token' + (i >= dadTokens ? ' used' : '');
-                dadToken.textContent = '✖';
-                dadContainer.appendChild(dadToken);
+            let winner;
+            let messageType;
+            let message;
+
+            if (perfectMatches.length > 0) {
+                // Sort by combined score, pick highest
+                perfectMatches.sort((a, b) => b.combined - a.combined);
+                winner = perfectMatches[0];
+                messageType = '';
+                message = "You both want this! 🎉";
+                createConfetti();
+            } else {
+                // No perfect match - find best compromise (highest minimum)
+                scores.sort((a, b) => b.min - a.min || b.combined - a.combined);
+                winner = scores[0];
                 
-                const daughterToken = document.createElement('div');
-                daughterToken.className = 'token' + (i >= daughterTokens ? ' used' : '');
-                daughterToken.textContent = '✖';
-                daughterContainer.appendChild(daughterToken);
+                if (winner.min >= 5) {
+                    messageType = 'warning';
+                    message = "Best compromise - not perfect, but workable";
+                } else {
+                    messageType = 'bad';
+                    message = "Tough night... someone's gotta budge 😬";
+                }
             }
 
-            document.getElementById('dadSkip').textContent = dadSkip ? '(must skip)' : '';
-            document.getElementById('daughterSkip').textContent = daughterSkip ? '(must skip)' : '';
-        }
-
-        function updateButtons() {
-            const dadBtn = document.getElementById('dadVeto');
-            const daughterBtn = document.getElementById('daughterVeto');
+            // Update UI
+            document.getElementById('resultEmoji').textContent = winner.restaurant.emoji;
+            document.getElementById('resultName').textContent = winner.restaurant.name;
+            document.getElementById('resultDadScore').textContent = winner.dad;
+            document.getElementById('resultEireneScore').textContent = winner.eirene;
             
-            dadBtn.disabled = dadTokens <= 0 || dadSkip;
-            daughterBtn.disabled = daughterTokens <= 0 || daughterSkip;
-            
-            dadBtn.classList.toggle('skip', dadSkip);
-            daughterBtn.classList.toggle('skip', daughterSkip);
-        }
+            const msgEl = document.getElementById('resultMessage');
+            msgEl.textContent = message;
+            msgEl.className = 'result-message ' + messageType;
 
-        function showSuggestion() {
-            const suggestion = gameList[currentIndex % gameList.length];
-            document.getElementById('suggestionEmoji').textContent = suggestion.emoji;
-            document.getElementById('suggestionText').textContent = suggestion.name;
-        }
+            const cardEl = document.getElementById('resultCard');
+            cardEl.className = 'result-card ' + (messageType === 'warning' ? 'compromise' : messageType === 'bad' ? 'no-match' : '');
 
-        function veto(player) {
-            const card = document.getElementById('suggestionCard');
-            card.classList.add('shake');
-            setTimeout(() => card.classList.remove('shake'), 500);
-
-            card.style.borderColor = '#ff4757';
-            setTimeout(() => card.style.borderColor = '#ffd700', 300);
-
-            if (player === 'dad') {
-                dadTokens--;
-                dadSkip = true;
-                daughterSkip = false;
-            } else {
-                daughterTokens--;
-                daughterSkip = true;
-                dadSkip = false;
-            }
-
-            currentIndex++;
-            
-            if (dadTokens <= 0 && daughterTokens <= 0) {
-                setTimeout(() => showWinner(), 600);
-                return;
-            }
-
-            renderTokens();
-            updateButtons();
-            showSuggestion();
-        }
-
-        function acceptChoice() {
-            showWinner();
-        }
-
-        function showWinner() {
-            const suggestion = gameList[currentIndex % gameList.length];
-            document.getElementById('winnerEmoji').textContent = suggestion.emoji;
-            document.getElementById('winnerChoice').textContent = suggestion.name;
-            document.getElementById('winnerScreen').classList.add('show');
-            createConfetti();
+            switchScreen('eireneScreen', 'resultScreen');
         }
 
         function playAgain() {
-            document.getElementById('winnerScreen').classList.remove('show');
-            document.getElementById('gameScreen').classList.remove('active');
-            document.getElementById('setupScreen').classList.add('active');
-            // Keep filter state for quick replay
+            switchScreen('resultScreen', 'setupScreen');
+        }
+
+        function backToSetup() {
+            switchScreen('resultScreen', 'setupScreen');
         }
 
         function createConfetti() {
-            const colors = ['#ffd700', '#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ff8c00', '#2ecc71'];
-            for (let i = 0; i < 100; i++) {
+            const colors = ['#ffd700', '#ff6b9d', '#4ecdc4', '#45b7d1', '#96ceb4', '#ff8c00', '#2ecc71'];
+            for (let i = 0; i < 80; i++) {
                 setTimeout(() => {
                     const confetti = document.createElement('div');
                     confetti.className = 'confetti';
@@ -871,13 +639,13 @@
             }
         }
 
-        // Enter key to add restaurant
+        // Enter key to add
         document.getElementById('newRestaurant').addEventListener('keypress', (e) => {
             if (e.key === 'Enter') addRestaurant();
         });
 
-        // Initialize
-        loadMasterList();
+        // Init
+        loadRestaurants();
     </script>
 </body>
 </html>
