@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>What's For Dinner?!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #ffd700;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700; }
+            to { text-shadow: 0 0 20px #ffd700, 0 0 30px #ff8c00; }
+        }
+
+        .subtitle {
+            color: #888;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+
+        .suggestion-card {
+            background: linear-gradient(145deg, #2a2a4a, #1a1a3a);
+            border: 3px solid #ffd700;
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin: 20px 0;
+            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .suggestion-card.shake {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0) rotate(0); }
+            20% { transform: translateX(-20px) rotate(-5deg); }
+            40% { transform: translateX(20px) rotate(5deg); }
+            60% { transform: translateX(-15px) rotate(-3deg); }
+            80% { transform: translateX(15px) rotate(3deg); }
+        }
+
+        .suggestion-text {
+            font-size: 2.5rem;
+            color: #fff;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .suggestion-emoji {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .tokens-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .player-tokens {
+            background: rgba(255,255,255,0.05);
+            padding: 15px 20px;
+            border-radius: 15px;
+            min-width: 140px;
+        }
+
+        .player-name {
+            color: #ffd700;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .tokens {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .token {
+            width: 30px;
+            height: 30px;
+            background: #ffd700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .token.used {
+            background: #333;
+            box-shadow: none;
+            transform: scale(0.8);
+        }
+
+        .token.disabled {
+            opacity: 0.3;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .veto-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 18px 35px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .veto-btn {
+            background: linear-gradient(145deg, #ff4757, #c0392b);
+            color: white;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .veto-btn:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(255, 71, 87, 0.5);
+        }
+
+        .veto-btn:disabled {
+            background: #444;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .veto-btn.skip {
+            background: #666;
+        }
+
+        .accept-btn {
+            background: linear-gradient(145deg, #2ecc71, #27ae60);
+            color: white;
+            font-size: 1.3rem;
+            padding: 22px 40px;
+        }
+
+        .accept-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 25px rgba(46, 204, 113, 0.5);
+        }
+
+        .reset-btn {
+            background: transparent;
+            color: #888;
+            border: 2px solid #444;
+            margin-top: 20px;
+            padding: 12px 25px;
+            font-size: 0.9rem;
+        }
+
+        .reset-btn:hover {
+            border-color: #ffd700;
+            color: #ffd700;
+        }
+
+        .edit-btn {
+            background: transparent;
+            color: #666;
+            border: 1px solid #333;
+            padding: 8px 15px;
+            font-size: 0.75rem;
+            margin-top: 10px;
+        }
+
+        .edit-btn:hover {
+            border-color: #ffd700;
+            color: #ffd700;
+        }
+
+        .winner-screen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .winner-screen.show {
+            display: flex;
+        }
+
+        .winner-text {
+            font-size: 1.5rem;
+            color: #ffd700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .winner-choice {
+            font-size: 3rem;
+            color: #fff;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .winner-emoji {
+            font-size: 6rem;
+            margin-bottom: 20px;
+        }
+
+        .winner-rule {
+            color: #ff6b6b;
+            font-size: 1.2rem;
+            margin: 20px 0;
+            padding: 15px;
+            border: 2px dashed #ff6b6b;
+            border-radius: 10px;
+            max-width: 350px;
+        }
+
+        /* Modal for editing */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1001;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #1a1a2e;
+            border: 2px solid #ffd700;
+            border-radius: 20px;
+            padding: 30px;
+            width: 100%;
+            max-width: 450px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-title {
+            color: #ffd700;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .modal textarea {
+            width: 100%;
+            height: 250px;
+            background: #0a0a1a;
+            border: 1px solid #333;
+            border-radius: 10px;
+            color: #fff;
+            padding: 15px;
+            font-size: 1rem;
+            font-family: inherit;
+            resize: vertical;
+        }
+
+        .modal textarea:focus {
+            outline: none;
+            border-color: #ffd700;
+        }
+
+        .modal-hint {
+            color: #666;
+            font-size: 0.85rem;
+            margin: 10px 0 20px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .modal-btn {
+            padding: 12px 30px;
+        }
+
+        .save-btn {
+            background: linear-gradient(145deg, #ffd700, #ff8c00);
+            color: #000;
+        }
+
+        .cancel-btn {
+            background: transparent;
+            border: 2px solid #666;
+            color: #666;
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            top: -10px;
+            z-index: 1002;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+            }
+        }
+
+        .skip-indicator {
+            font-size: 0.7rem;
+            color: #ff6b6b;
+            margin-top: 5px;
+            height: 18px;
+        }
+
+        /* Responsive */
+        @media (max-width: 400px) {
+            h1 { font-size: 2rem; }
+            .suggestion-text { font-size: 2rem; }
+            .suggestion-emoji { font-size: 3rem; }
+            .suggestion-card { padding: 30px 20px; }
+            button { padding: 15px 25px; font-size: 1rem; }
+            .winner-choice { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍽️ What's For Dinner?!</h1>
+        <p class="subtitle">The game that ends "I don't know" forever</p>
+
+        <div class="suggestion-card" id="suggestionCard">
+            <span class="suggestion-emoji" id="suggestionEmoji">🍕</span>
+            <div class="suggestion-text" id="suggestionText">Pizza</div>
+        </div>
+
+        <div class="tokens-container">
+            <div class="player-tokens">
+                <div class="player-name">👨 Dad</div>
+                <div class="tokens" id="dadTokens"></div>
+                <div class="skip-indicator" id="dadSkip"></div>
+            </div>
+            <div class="player-tokens">
+                <div class="player-name">👧 Daughter</div>
+                <div class="tokens" id="daughterTokens"></div>
+                <div class="skip-indicator" id="daughterSkip"></div>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button class="accept-btn" onclick="acceptChoice()">🎉 LET'S EAT THIS!</button>
+            <div class="veto-buttons">
+                <button class="veto-btn" id="dadVeto" onclick="veto('dad')">👨 Dad Veto</button>
+                <button class="veto-btn" id="daughterVeto" onclick="veto('daughter')">👧 Daughter Veto</button>
+            </div>
+            <button class="reset-btn" onclick="resetGame()">🔄 New Round</button>
+            <button class="edit-btn" onclick="openModal()">✏️ Edit Restaurant List</button>
+        </div>
+    </div>
+
+    <div class="winner-screen" id="winnerScreen">
+        <div class="winner-text">🎊 IT'S DECIDED! 🎊</div>
+        <div class="winner-emoji" id="winnerEmoji">🍕</div>
+        <div class="winner-choice" id="winnerChoice">Pizza</div>
+        <div class="winner-rule">⚠️ NO MORE COMPLAINING ALLOWED ⚠️</div>
+        <button class="accept-btn" onclick="closeWinner()">Play Again</button>
+    </div>
+
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <h2 class="modal-title">✏️ Edit Restaurant List</h2>
+            <textarea id="restaurantInput"></textarea>
+            <p class="modal-hint">One restaurant per line. Format: emoji name (e.g., 🍕 Pizza)</p>
+            <div class="modal-buttons">
+                <button class="modal-btn cancel-btn" onclick="closeModal()">Cancel</button>
+                <button class="modal-btn save-btn" onclick="saveRestaurants()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Default restaurants
+        const defaultRestaurants = [
+            { emoji: '🍕', name: 'Pizza' },
+            { emoji: '🌮', name: 'Mexican' },
+            { emoji: '🍝', name: 'Italian' },
+            { emoji: '🍜', name: 'Pho' },
+            { emoji: '🍣', name: 'Sushi' },
+            { emoji: '🍔', name: 'Burgers' },
+            { emoji: '🥡', name: 'Chinese' },
+            { emoji: '🍛', name: 'Indian' },
+            { emoji: '🥗', name: 'Salads' },
+            { emoji: '🍗', name: 'Chicken' },
+            { emoji: '🌯', name: 'Mediterranean' },
+            { emoji: '🍱', name: 'Korean BBQ' },
+            { emoji: '🥪', name: 'Sandwiches' },
+            { emoji: '🍲', name: 'Thai' },
+            { emoji: '🥘', name: 'Spanish' },
+            { emoji: '🍖', name: 'BBQ' },
+            { emoji: '🥟', name: 'Dumplings' },
+            { emoji: '🌭', name: 'Hot Dogs' },
+            { emoji: '🥙', name: 'Greek' },
+            { emoji: '🍤', name: 'Seafood' }
+        ];
+
+        // Game state
+        let restaurants = [];
+        let currentIndex = 0;
+        let dadTokens = 3;
+        let daughterTokens = 3;
+        let dadSkip = false;
+        let daughterSkip = false;
+        let lastVetoer = null;
+
+        // Load restaurants from localStorage or use defaults
+        function loadRestaurants() {
+            const saved = localStorage.getItem('dinnerRestaurants');
+            if (saved) {
+                try {
+                    restaurants = JSON.parse(saved);
+                } catch {
+                    restaurants = [...defaultRestaurants];
+                }
+            } else {
+                restaurants = [...defaultRestaurants];
+            }
+            shuffleArray(restaurants);
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function renderTokens() {
+            const dadContainer = document.getElementById('dadTokens');
+            const daughterContainer = document.getElementById('daughterTokens');
+            
+            dadContainer.innerHTML = '';
+            daughterContainer.innerHTML = '';
+            
+            for (let i = 0; i < 3; i++) {
+                const dadToken = document.createElement('div');
+                dadToken.className = 'token' + (i >= dadTokens ? ' used' : '');
+                dadToken.textContent = '✖';
+                dadContainer.appendChild(dadToken);
+                
+                const daughterToken = document.createElement('div');
+                daughterToken.className = 'token' + (i >= daughterTokens ? ' used' : '');
+                daughterToken.textContent = '✖';
+                daughterContainer.appendChild(daughterToken);
+            }
+
+            // Update skip indicators
+            document.getElementById('dadSkip').textContent = dadSkip ? '(must skip)' : '';
+            document.getElementById('daughterSkip').textContent = daughterSkip ? '(must skip)' : '';
+        }
+
+        function updateButtons() {
+            const dadBtn = document.getElementById('dadVeto');
+            const daughterBtn = document.getElementById('daughterVeto');
+            
+            dadBtn.disabled = dadTokens <= 0 || dadSkip;
+            daughterBtn.disabled = daughterTokens <= 0 || daughterSkip;
+            
+            dadBtn.classList.toggle('skip', dadSkip);
+            daughterBtn.classList.toggle('skip', daughterSkip);
+        }
+
+        function showSuggestion() {
+            const suggestion = restaurants[currentIndex % restaurants.length];
+            document.getElementById('suggestionEmoji').textContent = suggestion.emoji;
+            document.getElementById('suggestionText').textContent = suggestion.name;
+        }
+
+        function veto(player) {
+            // Play shake animation
+            const card = document.getElementById('suggestionCard');
+            card.classList.add('shake');
+            setTimeout(() => card.classList.remove('shake'), 500);
+
+            // Buzzer effect - flash red
+            card.style.borderColor = '#ff4757';
+            setTimeout(() => card.style.borderColor = '#ffd700', 300);
+
+            // Deduct token
+            if (player === 'dad') {
+                dadTokens--;
+                dadSkip = true;
+                daughterSkip = false;
+            } else {
+                daughterTokens--;
+                daughterSkip = true;
+                dadSkip = false;
+            }
+
+            lastVetoer = player;
+            currentIndex++;
+            
+            // Check if game over (all tokens spent)
+            if (dadTokens <= 0 && daughterTokens <= 0) {
+                setTimeout(() => showWinner(), 600);
+                return;
+            }
+
+            renderTokens();
+            updateButtons();
+            showSuggestion();
+        }
+
+        function acceptChoice() {
+            showWinner();
+        }
+
+        function showWinner() {
+            const suggestion = restaurants[currentIndex % restaurants.length];
+            document.getElementById('winnerEmoji').textContent = suggestion.emoji;
+            document.getElementById('winnerChoice').textContent = suggestion.name;
+            document.getElementById('winnerScreen').classList.add('show');
+            createConfetti();
+        }
+
+        function closeWinner() {
+            document.getElementById('winnerScreen').classList.remove('show');
+            resetGame();
+        }
+
+        function resetGame() {
+            dadTokens = 3;
+            daughterTokens = 3;
+            dadSkip = false;
+            daughterSkip = false;
+            lastVetoer = null;
+            shuffleArray(restaurants);
+            currentIndex = 0;
+            renderTokens();
+            updateButtons();
+            showSuggestion();
+        }
+
+        function createConfetti() {
+            const colors = ['#ffd700', '#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ff8c00', '#2ecc71'];
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.width = (Math.random() * 10 + 5) + 'px';
+                    confetti.style.height = (Math.random() * 10 + 5) + 'px';
+                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    document.body.appendChild(confetti);
+                    setTimeout(() => confetti.remove(), 4000);
+                }, i * 30);
+            }
+        }
+
+        function openModal() {
+            const textarea = document.getElementById('restaurantInput');
+            const saved = localStorage.getItem('dinnerRestaurants');
+            let list = saved ? JSON.parse(saved) : defaultRestaurants;
+            textarea.value = list.map(r => `${r.emoji} ${r.name}`).join('\n');
+            document.getElementById('editModal').classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('editModal').classList.remove('show');
+        }
+
+        function saveRestaurants() {
+            const textarea = document.getElementById('restaurantInput');
+            const lines = textarea.value.split('\n').filter(l => l.trim());
+            const newRestaurants = lines.map(line => {
+                const trimmed = line.trim();
+                // Try to extract emoji from start
+                const emojiMatch = trimmed.match(/^(\p{Emoji})\s*(.+)$/u);
+                if (emojiMatch) {
+                    return { emoji: emojiMatch[1], name: emojiMatch[2].trim() };
+                }
+                // No emoji, use default
+                return { emoji: '🍽️', name: trimmed };
+            });
+            
+            if (newRestaurants.length > 0) {
+                localStorage.setItem('dinnerRestaurants', JSON.stringify(newRestaurants));
+                restaurants = newRestaurants;
+                shuffleArray(restaurants);
+                currentIndex = 0;
+                showSuggestion();
+            }
+            closeModal();
+        }
+
+        // Initialize
+        loadRestaurants();
+        renderTokens();
+        updateButtons();
+        showSuggestion();
+    </script>
+</body>
+</html>
